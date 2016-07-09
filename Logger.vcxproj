@@ -171,6 +171,7 @@ copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="LoggerSDLRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -178,6 +179,7 @@ copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     <ClInclude Include="Log.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="LoggerSDLRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

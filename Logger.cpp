@@ -1,36 +1,33 @@
 #include <iostream>
-#include <SDL.h>
+#include "LoggerSDLRenderer.h"
+
 int main(int argc, char *args[]) {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
-		return 1;
-	}
-
-	//Create an SDL Window
-	SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
-	if (win == nullptr) {
-		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
-		SDL_Quit();
-		return 1;
-	}
-
-	//Create an SDL Renderer
-	SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (ren == nullptr) {
-		SDL_DestroyWindow(win);
-		std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
-		SDL_Quit();
-		return 1;
-	}
+	LoggerSDLRenderer* pRenderer = new LoggerSDLRenderer("Logger", 640, 480);
+	pRenderer->Initialize();
 
 	int x1 = 0;
-	int x2 = 640;
+	int x2 = pRenderer->GetWidth();
 	int y1 = 0;
-	int y2 = 480;
+	int y2 = pRenderer->GetHeight();
 	bool descending = true;
-	while (true) {
-		SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
-		SDL_RenderClear(ren);
+
+	SDL_Event e;
+	bool quit = false;
+	while (!quit) {
+		while (SDL_PollEvent(&e)) {
+			if (e.type == SDL_QUIT) {
+				quit = true;
+			}
+			if (e.type == SDL_KEYDOWN) {
+				quit = true;
+			}
+			if (e.type == SDL_MOUSEBUTTONDOWN) {
+				quit = true;
+			}
+		}
+
+		pRenderer->Clear();
+	
 		if (descending) {
 			y1++;
 			y2--;
@@ -39,16 +36,15 @@ int main(int argc, char *args[]) {
 			y1--;
 			y2++;
 		}
-		if (y1 == 481 || y1==-1) {
+		if (y1 == pRenderer->GetHeight()+1 || y1==-1) {
 			descending = !descending;
 		}
 		
-		SDL_SetRenderDrawColor(ren, y1, 255, y2, 255);
-		SDL_RenderDrawLine(ren,
-			x1, y1, x2, y2);
-		SDL_RenderPresent(ren);
+		pRenderer->SetColor(255, 255, 255, 255);
+		pRenderer->DrawLine(x1, y1, x2, y2);
+		pRenderer->Present();
 	}
-	SDL_Delay(5000);
+	
 
 	SDL_Quit();
 	return 0;
