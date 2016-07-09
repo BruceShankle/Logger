@@ -11,6 +11,8 @@ public:
 	void DrawLine(int x1, int y1, int x2, int y2);
 	void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	void Present();
+	SDL_Texture* LoadTextureFromBMP(std::string fileName);
+	void DrawRedSquare(int x, int y);
 
 protected:
 	std::string _windowTitle;
@@ -19,4 +21,5 @@ protected:
 	bool _wasQuit;
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
+	SDL_Texture *_redSquareTexture;
 };

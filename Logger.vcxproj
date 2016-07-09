@@ -101,7 +101,8 @@
     </Link>
     <PostBuildEvent>
       <Command>echo "Copying SDL dlls to output folder..."
-copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Command>
+copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"
+copy /y "$(SolutionDir)*.bmp" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,7 +121,8 @@ copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     </Link>
     <PostBuildEvent>
       <Command>echo "Copying SDL dlls to output folder..."
-copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Command>
+copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"
+copy /y "$(SolutionDir)*.bmp" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,7 +145,8 @@ copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     </Link>
     <PostBuildEvent>
       <Command>echo "Copying SDL dlls to output folder..."
-copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Command>
+copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"
+copy /y "$(SolutionDir)*.bmp" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -166,7 +169,8 @@ copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     </Link>
     <PostBuildEvent>
       <Command>echo "Copying SDL dlls to output folder..."
-copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Command>
+copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"
+copy /y "$(SolutionDir)*.bmp" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -180,6 +184,9 @@ copy /y "$(SolutionDir)SDL2-2.0.4\lib\$(PlatformTarget)\*.dll" "$(OutDir)"</Comm
     <ClInclude Include="Level.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="LoggerSDLRenderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="redsquare.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

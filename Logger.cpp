@@ -1,9 +1,13 @@
 #include <iostream>
 #include "LoggerSDLRenderer.h"
+using namespace std;
 
 int main(int argc, char *args[]) {
-	LoggerSDLRenderer* pRenderer = new LoggerSDLRenderer("Logger", 640, 480);
-	pRenderer->Initialize();
+	LoggerSDLRenderer* pRenderer = new LoggerSDLRenderer("Logger", 1600, 1000);
+	if (!pRenderer->Initialize()) {
+		cout << "Renderer could not initialize." << endl;
+		return -1;
+	}
 
 	int x1 = 0;
 	int x2 = pRenderer->GetWidth();
@@ -42,6 +46,7 @@ int main(int argc, char *args[]) {
 		
 		pRenderer->SetColor(255, 255, 255, 255);
 		pRenderer->DrawLine(x1, y1, x2, y2);
+		pRenderer->DrawRedSquare(x1, y1);
 		pRenderer->Present();
 	}
 	

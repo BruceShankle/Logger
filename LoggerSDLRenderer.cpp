@@ -1,6 +1,8 @@
 #include "LoggerSDLRenderer.h"
 #include <iostream>
 
+using namespace std;
+
 LoggerSDLRenderer::LoggerSDLRenderer(std::string windowTitle, int width, int height):
 	_windowTitle(windowTitle),
 	_width(width),
@@ -12,13 +14,13 @@ LoggerSDLRenderer::LoggerSDLRenderer(std::string windowTitle, int width, int hei
 bool LoggerSDLRenderer::Initialize()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+		cout << "SDL_Init Error: " << SDL_GetError() << endl;
 		return false;
 	}
 
 	_window = SDL_CreateWindow("Hello World!", 100, 100, GetWidth(), GetHeight(), SDL_WINDOW_SHOWN);
 	if (_window == nullptr) {
-		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+		cout << "SDL_CreateWindow Error: " << SDL_GetError() << endl;
 		SDL_Quit();
 		return false;
 	}
@@ -26,12 +28,15 @@ bool LoggerSDLRenderer::Initialize()
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (_renderer == nullptr) {
 		SDL_DestroyWindow(_window);
-		std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+		cout << "SDL_CreateRenderer Error: " << SDL_GetError() << endl;
 		SDL_Quit();
 		return false;
 	}
 
-	return false;
+	
+	_redSquareTexture = LoadTextureFromBMP("redsquare.bmp");
+
+	return true;
 }
 
 void LoggerSDLRenderer::Clear()
@@ -53,4 +58,29 @@ void LoggerSDLRenderer::SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 void LoggerSDLRenderer::Present()
 {
 	SDL_RenderPresent(_renderer);
+}
+
+SDL_Texture * LoggerSDLRenderer::LoadTextureFromBMP(std::string fileName)
+{
+	SDL_Surface *bmp = SDL_LoadBMP(fileName.c_str());
+	if (bmp == nullptr) {
+		cout << "bitmap failed to load " << endl;
+		return nullptr;
+	}
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(_renderer, bmp);
+	SDL_FreeSurface(bmp);
+	return texture;
+	return nullptr;
+}
+
+void LoggerSDLRenderer::DrawRedSquare(int x, int y)
+{
+	SDL_Rect destRect;
+	destRect.x = x;
+	destRect.y = y;
+	destRect.w = 256;
+	destRect.h = 256;
+
+	SDL_RenderCopy(_renderer, _redSquareTexture, NULL, &destRect);
+
 }
