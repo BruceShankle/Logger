@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Frog.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Position.h" />
   </ItemGroup>

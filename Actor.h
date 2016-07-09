@@ -1,2 +1,9 @@
 #pragma once
-//The Actor class
+#include <string>
+#include "Position.h"
+
+class Actor {
+
+
+
+};
