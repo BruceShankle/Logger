@@ -18,7 +18,7 @@ bool LoggerSDLRenderer::Initialize()
 		return false;
 	}
 
-	_window = SDL_CreateWindow("Hello World!", 100, 100, GetWidth(), GetHeight(), SDL_WINDOW_SHOWN);
+	_window = SDL_CreateWindow(_windowTitle.c_str(), 100, 100, GetWidth(), GetHeight(), SDL_WINDOW_SHOWN);
 	if (_window == nullptr) {
 		cout << "SDL_CreateWindow Error: " << SDL_GetError() << endl;
 		SDL_Quit();

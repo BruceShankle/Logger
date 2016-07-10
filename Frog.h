@@ -1,10 +1,6 @@
 #pragma once
 #include "Actor.h"
 
-
-class Frog : Actor {
-
-
-
+class Frog : public Actor {
 
 };
